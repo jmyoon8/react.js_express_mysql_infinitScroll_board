@@ -82,6 +82,7 @@ customers.get('/customerBoard',async (req,res)=>{
                        bs.customerList({start:start,pageSize:pageSize},(err,list)=>{
                                if(err)return console.log(err)
                                Object.assign(page,{list:list})
+                               
                                res.json(page)
                        })
                 }
@@ -116,7 +117,7 @@ const upload=multer({storage:multer.diskStorage({
 //중간에 fomdata를 캐치헤서 그중 image가 키값인 값을 캐치한뒤 지정한 경로로 데이터를 저장
 customers.post('/customerAdd',upload.single('image'),(req,res)=>{
         
-        let sql='INSERT INTO CUSTOMER VALUES(null,?,?,?,?,?,now(),0)'
+        let sql='INSERT INTO CUSTOMER(image,name,birthday,gender,job) VALUES(?,?,?,?,?)'
         let image='/images/'+req.file.filename
         let name=req.body.name
         let birthday=req.body.birthday

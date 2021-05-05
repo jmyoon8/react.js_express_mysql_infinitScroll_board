@@ -1,0 +1,100 @@
+@import './mediaquery.scss';
+
+@include mobile{
+    .modalInner{
+        width: 55% !important;
+        height: 23% !important;
+    }
+    .button{
+        width: 100% !important;
+        position: unset !important;
+        right: unset !important;
+        
+    }
+    .filter{
+        font-size: 1.3rem !important;
+    }
+    .filterTitle{
+        font-size:  1.6rem !important;
+        
+    }
+    .x{
+        font-size: 1.4rem !important;
+    }
+}
+
+
+
+.modalOverlay{
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999; 
+    .modalWrapper{
+    
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        .modalInner{
+            position: relative;
+            background-color: #fff;
+            width: 350px;
+            height: 200px;
+            padding-left: 30px;
+            padding-right: 30px;
+
+            
+            .x {
+                position: absolute;
+                width: 100%;
+                text-align: right;
+                right: 0;
+                margin-right: 10px;
+                margin-top: 10px;
+                font-size: 1.1rem;
+                
+                
+                
+            }
+            .filter{
+                
+              margin-top: 25px;
+               .filterWrapper{
+                display: flex;
+                 flex-direction: column;   
+               }
+            }
+            .button{
+                border: 0px;
+                width: 80px;
+                height: 40px;
+                
+                display: inline;
+                margin-top: 20px;
+                position: absolute;
+                right: 0;
+                margin-right: 10px;
+                text-align: center;
+                vertical-align: middle;
+                border-radius: 4px;
+                background-color: #00c854;
+                color:#fff;
+
+                
+            }
+        }
+    }
+}

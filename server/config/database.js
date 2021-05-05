@@ -1,15 +1,17 @@
 ////database connection
 const mysql=require('mysql');
 
-const connecting=mysql.createConnection({
+const connecting=mysql.createPool({
     host:"localhost",
     user:'root',
     password:"1234",
     port:"3306",
-    database:"management"
+    database:"board"
 })
 //연결완료
-connecting.connect();
+
+
+
 
 
 //그리고 exports
