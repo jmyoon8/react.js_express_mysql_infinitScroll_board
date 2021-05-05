@@ -1,5 +1,6 @@
 "# react.js_express_mysql_infinitScroll_board" 
 
+기본적인 게시판 테이블 DDL
 CREATE TABLE CUSTOMER(
 	id int PRIMARY KEY AUTO_INCREMENT ,
 	image varchar(1024),
@@ -9,6 +10,7 @@ CREATE TABLE CUSTOMER(
 	job varchar(64)
 )DEFAULT CHARACTER SET UTF8 COLLATE utf8_general_ci;
 
+게시판 기본 게시물 DML
 INSERT INTO CUSTOMER (image,name,birthday,gender,job) VALUES ('http://placeimg.com/50/50/ANY','YoonJaeJin','19910812','male','developer');
 INSERT INTO CUSTOMER (image,name,birthday,gender,job) VALUES ('http://placeimg.com/50/50/ANY','YoonjaeMin','19910112','male','developer');
 INSERT INTO CUSTOMER (image,name,birthday,gender,job) VALUES ('http://placeimg.com/50/50/ANY','Yoonjaekin','19910116','male','developer');
