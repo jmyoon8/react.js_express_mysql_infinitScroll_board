@@ -1,5 +1,7 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import { api } from '../../../../ApiInstance/apis'
+import '../../../CSSS/modal.css'
 
 
 function Modal(props) {
@@ -18,9 +20,15 @@ function Modal(props) {
         localStorage.setItem('category',JSON.stringify(categorys))
 
         setFilterIsVisible(!filterIsVisible)
-        
-
     }
+    const [category,setCategory]=useState([])
+    useEffect(() => {
+        api.get('/category').then(res=>{
+            setCategory(res.data.category)
+           
+        })
+
+    }, [])
     return (
      
             <div className="modalOverlay" style={{display:filterIsVisible?"block":'none'}}>
@@ -35,15 +43,37 @@ function Modal(props) {
                                 필터
                             </div>
                             <div className="filterWrapper">
-                                <div>
-                                    <input type="checkbox" name="category"  defaultValue="category1" /> category_name
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="category" defaultValue="category1" /> category_name
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="category" defaultValue="category1" /> category_name
-                                </div>
+                                {
+                                    category.map((value,index)=>{
+                                        let checkCategory= JSON.parse(localStorage.getItem('category'))
+                                        
+                                        
+                                        for(let i =0; i<checkCategory.length;i++){
+                                            if(checkCategory[i].category===value.id.toString()){
+                                                return(
+                                                <div key={value.id}>
+                                                    <input type="checkbox" id={value.id} name="category" defaultChecked  defaultValue={value.id} />
+                                                    <label htmlFor={value.id} >
+                                                        {value.name}
+                                                    </label>
+                                                    
+
+                                                    
+                                                </div>
+                                                )
+                                            }
+                                        }
+                                        return (
+                                            <div key={value.id}>
+                                                <input type="checkbox" id={value.id} name="category"   defaultValue={value.id} /> 
+                                                <label htmlFor={value.id} >
+                                                        {value.name}
+                                                </label>
+                                            </div>
+                                        )
+                                    })
+                                }
+                               
                             </div>
                         </div>
                         <button onClick={categoryHandler} className="button">

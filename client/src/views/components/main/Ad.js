@@ -1,6 +1,8 @@
 import React from 'react'
 
-function Ad() {
+function Ad(props) {
+
+    const {contents,created_at,id,img,title,updated_at}=props
 
     return (
         <div className="adcontainer">
@@ -9,16 +11,15 @@ function Ad() {
             </div>
             <div className="adcontent">
                 <div className="imgContainer">
-                    <img className="img" src={require('./x.png').default} />
+                    <img className="img" src={`https://cdn.comento.kr/assignment/${img}`} />
                 </div>
                 
                 <div className="adcontentContainer">
                     <div className="adtitle">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim delectus quam eos voluptatum nesciunt. Amet perferendis, unde eligendi ratione fuga, dolorum magnam voluptates et, ipsum facere soluta non quia voluptatem.
+                    {title}
                     </div>
                     <div className="adSub">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim delectus quam eos voluptatum nesciunt. Amet perferendis, unde eligendi ratione fuga, dolorum magnam voluptates et, ipsum facere soluta non quia voluptatem.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim delectus quam eos voluptatum nesciunt. Amet perferendis, unde eligendi ratione fuga, dolorum magnam voluptates et, ipsum facere soluta non quia voluptatem.
+                        {contents}
                     </div>
                 </div>
             </div>

@@ -22,7 +22,9 @@
   .postingContainer {
     border-radius: 0px !important;
     border: 1px solid #7e848a !important;
-    margin-top: 10px;
+    margin-top: 10px !important;
+    border: 0px solid #fff !important;
+    border-top: 8px solid blanchedalmond !important;
   }
   .sort {
     border-bottom: 3px solid blanchedalmond !important;
@@ -43,16 +45,30 @@
             align-items: center !important;
   }
   html {
-    font-size: 11px;
+    font-size: 9px !important;
   }
   .adcontainer {
     border-radius: 0px !important;
     -webkit-box-align: center !important;
         -ms-flex-align: center !important;
             align-items: center !important;
+    border: 0px solid #fff !important;
+    border-top: 8px solid blanchedalmond !important;
   }
   .adSub {
     -webkit-line-clamp: 2 !important;
+  }
+  .title {
+    font-size: 1.7rem !important;
+  }
+  .adtitle {
+    font-size: 1.7rem !important;
+  }
+  .adSub {
+    font-size: 1.4rem !important;
+  }
+  .noitceContent {
+    font-size: 1.5rem !important;
   }
 }
 
@@ -64,7 +80,6 @@
 
 #root {
   width: 100%;
-  height: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -80,7 +95,6 @@
 .container {
   width: 100%;
   background-color: blanchedalmond;
-  border: 1px solid black;
   margin-top: 5%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -93,12 +107,13 @@
 }
 
 .container .label {
+  border: 1px solid black;
   padding-left: 23%;
   width: 100%;
   height: 60px;
   background-color: #fff;
   line-height: 60px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .container .content {
@@ -164,7 +179,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   height: 30px;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -202,6 +217,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  cursor: pointer;
 }
 
 .container .content .board .sort .led {
@@ -216,6 +232,8 @@
   border: 1px solid #adb5bd;
   color: #adb5bd;
   width: 30px;
+  min-width: 10px;
+  min-height: 10px;
 }
 
 .container .content .board .overflowDiv {
@@ -246,7 +264,7 @@
 }
 
 .container .content .board .overflowDiv .postingContainer .categoryName {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   color: '#7e848a';
   width: 100%;
   border-bottom: 1px solid #7e848a;
@@ -263,7 +281,7 @@
 }
 
 .container .content .board .overflowDiv .postingContainer .categoryName p {
-  line-height: 3px;
+  line-height: 10px;
 }
 
 .container .content .board .overflowDiv .postingContainer .postingDate {
@@ -371,7 +389,6 @@
   -webkit-box-flex: 1.9;
       -ms-flex: 1.9;
           flex: 1.9;
-  padding-left: 20px;
   height: 100%;
   display: -webkit-box !important;
   display: -ms-flexbox !important;

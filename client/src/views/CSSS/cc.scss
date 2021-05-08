@@ -20,7 +20,11 @@
         .postingContainer{
             border-radius: 0px !important;
             border: 1px solid #7e848a !important;
-            margin-top: 10px;
+            margin-top: 10px !important;
+            border: 0px solid #fff !important;
+            border-top: 8px solid blanchedalmond !important;
+            
+            
         }
         .sort{
             border-bottom: 3px solid blanchedalmond !important;
@@ -32,16 +36,31 @@
         }
       
         html{
-            font-size: 11px;
+            font-size: 9px !important;
         }
         .adcontainer{
             border-radius: 0px !important;
             align-items: center !important;
+            border: 0px solid #fff !important;
+            border-top: 8px solid blanchedalmond !important;
             
         }
         .adSub{
             -webkit-line-clamp:2 !important; 
         }
+        .title{
+            font-size: 1.7rem !important;
+        }
+        .adtitle{
+            font-size: 1.7rem !important;
+        }
+        .adSub{
+            font-size: 1.4rem !important;
+        }
+        .noitceContent{
+            font-size: 1.5rem !important;
+        }
+      
        
 
 
@@ -52,30 +71,29 @@
 }
 #root{
     width: 100%;
-    height: 100vw;
     display: flex;
     flex-direction: column;
-    
     align-items: center;
 }
 
 .container{
     width:100%;
     background-color: blanchedalmond;
-    border: 1px solid black;
+    
     margin-top:5%;
     display: flex;
     flex-direction: column;
     position: relative;
 
     .label{
-        
+        @include border();
         padding-left: $paddingLeft;
         width: 100%;
         height: 60px;
         background-color: #fff;
         line-height: 60px;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        
     }
     .content{
         
@@ -106,20 +124,16 @@
             margin-left: 20px;
             width: 45%;
             height: 95%;
-            
             display:flex;
             flex-direction: column;
             position: relative;
-            
-            
-        
             .sort{
                 display: flex;
                 flex-direction: row;
                 position: sticky;
                 width: 100%;
                 justify-content: space-between;
-                font-size: 0.5rem;
+                font-size: 0.7rem;
                 height: 30px;
                 align-items: center;
                 
@@ -137,6 +151,7 @@
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
+                    cursor: pointer;
                     
                 }
                 .led{
@@ -151,12 +166,15 @@
                     border: 1px solid #adb5bd ;
                     color: #adb5bd;
                     width: 30px;
+                    
+                    min-width: 10px;
+                    min-height: 10px;
                 }
             }
             .overflowDiv{
                 margin-top:"10px";
                 overflow-y: auto;
-
+         
                 .postingContainer{
                     border: 1px solid #7e848a;
                     width: 100%;
@@ -169,20 +187,19 @@
                     border-radius: 8px;
                     margin-bottom: 10px;
                     .categoryName{
-                        font-size: 0.6rem;
+                        font-size: 0.8rem;
                         color: '#7e848a';
                         width: 100%;
                         border-bottom: 1px solid #7e848a;
                         @include Flex_row();
                         justify-content: space-between;
                         p{
-                            line-height: 3px;
+                            line-height: 10px;
                         }
                     }
                     .postingDate{
                         
                         width: 100%;
-                        
                         @include Flex_row();
                         font-size: 0.6rem;
                         margin-top: 5px;
@@ -190,7 +207,6 @@
                         .userId{
                             color:#00c854;
                             border-right: 1px #7e848a solid;
-                            
                             padding-right: 5px;
                             
                         }
@@ -252,7 +268,6 @@
                         }
                        .adcontentContainer{
                             flex: 1.9;
-                            padding-left: 20px;
                             height: 100%;
                             @include Flex_column();
                             justify-content: flex-start;
@@ -270,6 +285,7 @@
                                 margin-bottom: 10px;
                                 font-weight: bold;
                                 font-size: 1.3rem;
+                                
                             }
                             .adSub{
                                 max-width: 100%;

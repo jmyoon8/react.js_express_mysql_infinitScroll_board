@@ -1,29 +1,36 @@
 import React from 'react'
+import '../../CSSS/cc.css'
 
-function NoticeContent() {
+function NoticeContent(props) {
+    const {category_id,contents,created_at,id,title,updated_at,user_id,page}=props
+    const goToContent =()=>{
+        props.history.push(`/content/${id}`)
+    }
     return (
-        <div className="postingContainer">
+        <div onClick={goToContent} className="postingContainer">
             <div className="categoryName">
                 <p>
-                category_name
+                {category_id===1?'apple':category_id===2?'banana':category_id===3&&'coconut'}
                 </p>
                 <p>
-                id
+                {id}
                 </p>
             </div>
             <div className="postingDate">
                 <div className="userId">
-                    user_id
+                    {user_id}
+                    
+                    {page}    
                 </div>
                 <div className="createDate">
-                        created_at(2020-02-02)
+                        created_at({created_at.split('T')[0]})
                 </div>
             </div>
             <div className="title">
-                titletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitle
+                {title}
             </div>
             <div className="noitceContent">
-                contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent
+                {contents}
             </div>
         </div>
     )
