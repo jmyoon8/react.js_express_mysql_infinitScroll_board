@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../../CSSS/cc.css'
 function Ad(props) {
 
     const {contents,created_at,id,img,title,updated_at}=props
