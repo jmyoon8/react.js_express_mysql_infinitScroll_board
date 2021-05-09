@@ -24,11 +24,16 @@ function LandingPage(props) {
     const [ads,setAds]=useState([])
     //광고를 몇번째 개시물마다 보여줄것인지?
     const [addShow,setAddshow]=useState(4)
+    const [cutAds,setCutAds]=useState(false)
+
     //로컬스토리지
     const [checkedCategory,setCheckedCategory]=useState(JSON.parse(localStorage.getItem('category')))
+
     
-    
-    
+    useEffect(() => {
+        localStorage.getItem('checked')?setCutAds(false):setCutAds(true)
+        
+    }, [localStorage.getItem('checked')])
     useEffect(() => {
           // 글목록
            api.get(`/list`,{
@@ -160,41 +165,47 @@ function LandingPage(props) {
                                 // 인덱스가 4의 배수일 경우 광고를 같이 노출시킨다.
                                 index=index+1
                                 
-                                let arr =checkedCategory.map(value=>{
+                                let arr =checkedCategory?.map(value=>{
                                     return value.category
                                 })
                                 
                                 if(index%(addShow)===0){  
                                     //   광고를 랜덤으로 노출시킨다.
                                     let adnumber=Math.floor(Math.random() * perPage)
-                                    
+                                    console.log(cutAds)
                                     return(
-                                        <>
-                                            <Ad
-                                                key={ads[adnumber].contents}
-                                                contents={ads[adnumber].contents}
-                                                created_at={ads[adnumber].created_at}
-                                                id={ads[adnumber].id}
-                                                img={ads[adnumber].img}
-                                                title={ads[adnumber].title}
-                                                updated_at={ads[adnumber].updated_at}
+                                        <>  
+                                            {
+                                                cutAds&&
+                                                <Ad
+                                                    key={ads[adnumber].contents}
+                                                    contents={ads[adnumber].contents}
+                                                    created_at={ads[adnumber].created_at}
+                                                    id={ads[adnumber].id}
+                                                    img={ads[adnumber].img}
+                                                    title={ads[adnumber].title}
+                                                    updated_at={ads[adnumber].updated_at}
 
-                                            />
+                                                />
+                                            }
                                             {
                                                 //필터링
-                                               arr.indexOf(value.category_id.toString())!=-1&&
+                                               
+                                                arr?.indexOf(value.category_id.toString())!=-1&&
                                                <NoticeContent 
-                                               page={page}
-                                               key={value.created_at}
-                                               category_id={value.category_id} 
-                                               contents={value.contents}
-                                               created_at={value.created_at}
-                                               id={value.id}
-                                               title={value.title}
-                                               updated_at={value.updated_at}
-                                               user_id={value.user_id}
-                                               history={props.history}
-                                           />
+                                                    page={page}
+                                                    key={value.created_at}
+                                                    category_id={value.category_id} 
+                                                    contents={value.contents}
+                                                    created_at={value.created_at}
+                                                    id={value.id}
+                                                    title={value.title}
+                                                    updated_at={value.updated_at}
+                                                    user_id={value.user_id}
+                                                    history={props.history}
+                                                />
+                                                
+                                                
                                             }
                                         
                                           
@@ -207,7 +218,7 @@ function LandingPage(props) {
                                             <>
                                             {
                                                 //필터링
-                                                arr.indexOf(value.category_id.toString())!=-1&&
+                                                arr?.indexOf(value.category_id.toString())!=-1&&
                                                 <NoticeContent 
                                                     key={value.id}
                                                     category_id={value.category_id} 

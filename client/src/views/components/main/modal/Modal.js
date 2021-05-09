@@ -6,6 +6,7 @@ import '../../../CSSS/modal.css'
 
 function Modal(props) {
     const {filterIsVisible,setFilterIsVisible}=props
+    const [category,setCategory]=useState([])
     
 
     const categoryHandler =()=>{
@@ -17,11 +18,22 @@ function Modal(props) {
                 categorys.push({category:cate[i].value})
             }
         }
+        
         localStorage.setItem('category',JSON.stringify(categorys))
+
+
+        let cutAds=document.getElementById('cutAds').checked
+       
+
+        if(cutAds){
+            localStorage.setItem('checked',true)
+        }else{
+            localStorage.removeItem('checked')
+        }
 
         setFilterIsVisible(!filterIsVisible)
     }
-    const [category,setCategory]=useState([])
+    
     useEffect(() => {
         api.get('/category').then(res=>{
             setCategory(res.data.category)
@@ -43,42 +55,58 @@ function Modal(props) {
                                 필터
                             </div>
                             <div className="filterWrapper">
-                                {
-                                    category.map((value,index)=>{
-                                        let checkCategory= JSON.parse(localStorage.getItem('category'))
-                                        
-                                        
-                                        for(let i =0; i<checkCategory.length;i++){
-                                            if(checkCategory[i].category===value.id.toString()){
-                                                return(
-                                                <div key={value.id}>
-                                                    <input type="checkbox" id={value.id} name="category" defaultChecked  defaultValue={value.id} />
-                                                    <label htmlFor={value.id} >
-                                                        {value.name}
-                                                    </label>
-                                                    
+                                {   
 
-                                                    
-                                                </div>
+                                    category.map((value,index)=>{
+                                        
+                                        let checkCategory= JSON.parse(localStorage.getItem('category'))
+                                        //로컬 스토리지에 category가 있는지 없는지 분기
+                                        if(!checkCategory){
+                                                return (
+                                                    <div key={value.id}>
+                                                        <input type="checkbox" id={value.id} name="category" defaultChecked  defaultValue={value.id} /> 
+                                                        <label htmlFor={value.id} >
+                                                                {value.name}
+                                                        </label>
+                                                    </div>
                                                 )
-                                            }
+                                        }else{
+                                                for(let i =0; i<checkCategory.length;i++){
+                                                    if(checkCategory[i].category===value.id.toString()){
+                                                        return(
+                                                        <div key={value.id}>
+                                                            <input type="checkbox" id={value.id} name="category" defaultChecked   defaultValue={value.id} />
+                                                            <label htmlFor={value.id} >
+                                                                {value.name}
+                                                            </label>
+                                                        </div>
+                                                        )
+                                                    }
+                                                }
+                                                return (
+                                                    <div key={value.id}>
+                                                        <input type="checkbox" id={value.id} name="category"   defaultValue={value.id} /> 
+                                                        <label htmlFor={value.id} >
+                                                                {value.name}
+                                                        </label>
+                                                    </div>
+                                                )
                                         }
-                                        return (
-                                            <div key={value.id}>
-                                                <input type="checkbox" id={value.id} name="category"   defaultValue={value.id} /> 
-                                                <label htmlFor={value.id} >
-                                                        {value.name}
-                                                </label>
-                                            </div>
-                                        )
                                     })
                                 }
+                                <div>
+                                    <input type="checkbox" id="cutAds" defaultChecked={localStorage.getItem('checked')?true:false} defaultValue="cutAds"/> 
+                                    <label htmlFor="cutAds" >
+                                        광고가리기        
+                                    </label>
+                                </div>  
+                            
                                
                             </div>
                         </div>
-                        <button onClick={categoryHandler} className="button">
-                            저장하기
-                        </button>
+                            <button onClick={categoryHandler} className="button">
+                                저장하기
+                            </button>
                     </div>
                 </div>
             </div>

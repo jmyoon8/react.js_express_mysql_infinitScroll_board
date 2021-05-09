@@ -7,7 +7,7 @@
 @media (max-width: 768px) {
   .modalInner {
     width: 55% !important;
-    height: 23% !important;
+    height: 25% !important;
   }
   .button {
     width: 100% !important;
@@ -89,6 +89,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow-y: scroll;
+  max-height: 80px;
 }
 
 .modalOverlay .modalWrapper .modalInner .button {
@@ -100,6 +102,7 @@
   position: absolute;
   right: 0;
   margin-right: 10px;
+  margin-top: 10px;
   text-align: center;
   vertical-align: middle;
   border-radius: 4px;
