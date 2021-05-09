@@ -4,6 +4,13 @@
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
 
+.nodrag {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 @media (max-width: 768px) {
   .conTentloginButton {
     display: none !important;
@@ -184,6 +191,13 @@
       align-self: flex-start;
   font-size: 0.8rem;
   color: #adb5bd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
 }
 
 .conTentcontainer .conTentcontent .conTentboard .conTentreply {
@@ -247,5 +261,11 @@
   margin-top: 14px;
   color: #adb5bd;
   font-size: 0.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=content.css.map */

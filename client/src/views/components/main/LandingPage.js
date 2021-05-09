@@ -14,10 +14,9 @@ function LandingPage(props) {
     // 정렬
     const [sort,setSort]=useState('asc')
     //몇페이지에서 져올것인지
-    
     const [page,setPage]=useState(1)
     //몇개씩 가져올것인가?
-    const [perPage,setPerPage]=useState(10)
+    const [perPage]=useState(11)
     // 글목록
     const [notices,setNotices]=useState([])
     //광고목록
@@ -47,7 +46,7 @@ function LandingPage(props) {
         }).then(res=>{
             
             
-            if(res.data.data.length!=0){
+            if(res.data.data.length!==0){
                 
                 setNotices(notices.concat(res.data.data).sort((a,b)=>{
                     return sort==='asc'? a.id-b.id:b.id-a.id
@@ -59,7 +58,11 @@ function LandingPage(props) {
           
             
         })
-        sortsetting(sort)
+        if(localStorage.getItem('sort')){
+            sortsetting(localStorage.getItem('sort'))
+        }else{
+            sortsetting(sort)
+        }
 
         //광고
          api.get('/ads',{
@@ -68,8 +71,8 @@ function LandingPage(props) {
                 limit:perPage
             }
         }).then(res=>{
-            
-            if(res.data.data.length!=0){
+            console.log(res.data.data.length)
+            if(res.data.data.length>=page){
                 
                 setAds(res.data.data)
             }else{
@@ -77,7 +80,7 @@ function LandingPage(props) {
             }
         })
         //배열정렬
-        
+        console.log("dasda??")
     }, [page])
     
     useEffect(() => {
@@ -88,6 +91,8 @@ function LandingPage(props) {
     }, [localStorage.getItem('category')])
 
    const sortsetting=(sort)=>{
+
+        localStorage.setItem('sort',sort)
         if(sort==="desc"){
             setNotices(notices.sort((a,b)=>{
                 return b.id-a.id
@@ -119,7 +124,7 @@ function LandingPage(props) {
                 setPage((prev)=>prev+1)
             }
     }
-    // 스크롤 이벤트 구독/취소
+    // 스크롤 이벤트 구독
     useEffect(() => {
         
         document.getElementById('scroll').addEventListener('scroll',debounce(_scrollHandler,300))
@@ -130,7 +135,7 @@ function LandingPage(props) {
     return (
         <>
         <div id="container" className="container">
-            <Modal filterIsVisible={filterIsVisible} setFilterIsVisible={setFilterIsVisible}  />
+            <Modal filterIsVisible={filterIsVisible} setFilterIsVisible={setFilterIsVisible} addShow={addShow} setAddshow={setAddshow} />
             <div className="label">
                 [2021-05-10]윤재진
             </div>
@@ -168,59 +173,51 @@ function LandingPage(props) {
                                 let arr =checkedCategory?.map(value=>{
                                     return value.category
                                 })
-                                
-                                if(index%(addShow)===0){  
+                                if(index%(addShow-1)===0){  
+                                    
                                     //   광고를 랜덤으로 노출시킨다.
                                     let adnumber=Math.floor(Math.random() * perPage)
-                                    console.log(cutAds)
                                     return(
                                         <>  
+                                          
                                             {
+                                                //필터링
+                                                arr?.indexOf(value.category_id.toString())!==-1&&
+                                               <NoticeContent 
+                                                    page={page}
+                                                    key={value.id+value.category_id}
+                                                    category_id={value.category_id} 
+                                                    contents={value.contents}
+                                                    created_at={value.created_at}
+                                                    id={value.id}
+                                                    title={value.title}
+                                                    updated_at={value.updated_at}
+                                                    user_id={value.user_id}
+                                                    history={props.history}
+                                                />
+                                            }
+                                              {
                                                 cutAds&&
                                                 <Ad
-                                                    key={ads[adnumber].contents}
+                                                    key={ads[adnumber].id+adnumber}
                                                     contents={ads[adnumber].contents}
                                                     created_at={ads[adnumber].created_at}
                                                     id={ads[adnumber].id}
                                                     img={ads[adnumber].img}
                                                     title={ads[adnumber].title}
                                                     updated_at={ads[adnumber].updated_at}
-
                                                 />
                                             }
-                                            {
-                                                //필터링
-                                               
-                                                arr?.indexOf(value.category_id.toString())!=-1&&
-                                               <NoticeContent 
-                                                    page={page}
-                                                    key={value.created_at}
-                                                    category_id={value.category_id} 
-                                                    contents={value.contents}
-                                                    created_at={value.created_at}
-                                                    id={value.id}
-                                                    title={value.title}
-                                                    updated_at={value.updated_at}
-                                                    user_id={value.user_id}
-                                                    history={props.history}
-                                                />
-                                                
-                                                
-                                            }
-                                        
-                                          
-                                           
                                         </>
                                     )
                                 }else{
-                                    
                                     return (
                                             <>
                                             {
                                                 //필터링
-                                                arr?.indexOf(value.category_id.toString())!=-1&&
+                                                arr?.indexOf(value.category_id.toString())!==-1&&
                                                 <NoticeContent 
-                                                    key={value.id}
+                                                    key={value.id+value.category_id}
                                                     category_id={value.category_id} 
                                                     contents={value.contents}
                                                     created_at={value.created_at}
@@ -229,10 +226,8 @@ function LandingPage(props) {
                                                     updated_at={value.updated_at}
                                                     user_id={value.user_id}
                                                     history={props.history}
-                                            
                                                 />
                                             }
-                                            
                                             </>
                                         )
                                 }

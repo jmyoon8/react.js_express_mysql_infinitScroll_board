@@ -13,23 +13,22 @@ function NoticeContent(props) {
                 {category_id===1?'apple':category_id===2?'banana':category_id===3&&'coconut'}
                 </p>
                 <p>
-                {id}
+                {id}번
                 </p>
             </div>
             <div className="postingDate">
                 <div className="userId">
                     {user_id}
-                    
-                    {page}    
+                    {page}
                 </div>
                 <div className="createDate">
                         created_at({created_at.split('T')[0]})
                 </div>
             </div>
-            <div className="title">
+            <div className="title nodrag">
                 {title}
             </div>
-            <div className="noitceContent">
+            <div className="noitceContent nodrag">
                 {contents}
             </div>
         </div>

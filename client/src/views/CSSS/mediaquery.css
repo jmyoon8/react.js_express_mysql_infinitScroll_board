@@ -3,4 +3,11 @@
           box-sizing: border-box;
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
+
+.nodrag {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 /*# sourceMappingURL=mediaquery.css.map */

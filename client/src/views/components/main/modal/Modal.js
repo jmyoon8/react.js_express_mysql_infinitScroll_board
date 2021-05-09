@@ -5,9 +5,9 @@ import '../../../CSSS/modal.css'
 
 
 function Modal(props) {
-    const {filterIsVisible,setFilterIsVisible}=props
+    const {filterIsVisible,setFilterIsVisible,addShow,setAddshow}=props
     const [category,setCategory]=useState([])
-    
+    const [number,setNumber]=useState(0)
 
     const categoryHandler =()=>{
         let categorys=[]
@@ -19,11 +19,12 @@ function Modal(props) {
             }
         }
         
-        localStorage.setItem('category',JSON.stringify(categorys))
+       localStorage.setItem('category',JSON.stringify(categorys))
 
 
-        let cutAds=document.getElementById('cutAds').checked
-       
+       let cutAds=document.getElementById('cutAds').checked
+       //순번저장
+       localStorage.setItem('number',number)
 
         if(cutAds){
             localStorage.setItem('checked',true)
@@ -33,13 +34,18 @@ function Modal(props) {
 
         setFilterIsVisible(!filterIsVisible)
     }
-    
+    useEffect(() => {
+        let adTimesNumber=localStorage.getItem('number')
+        if(adTimesNumber){
+            setNumber(parseInt(adTimesNumber))
+            setAddshow(parseInt(adTimesNumber))
+        }
+    }, [localStorage.getItem('number')])
+
     useEffect(() => {
         api.get('/category').then(res=>{
             setCategory(res.data.category)
-           
         })
-
     }, [])
     return (
      
@@ -98,6 +104,12 @@ function Modal(props) {
                                     <input type="checkbox" id="cutAds" defaultChecked={localStorage.getItem('checked')?true:false} defaultValue="cutAds"/> 
                                     <label htmlFor="cutAds" >
                                         광고가리기        
+                                    </label>
+                                </div>  
+                                <div>
+                                    <input type="number" id="number" min={2} max={10} value={number} onChange={(e)=>{setNumber(e.target.valueAsNumber)}} /> 
+                                    <label htmlFor="number" >
+                                        광고 노출 빈도
                                     </label>
                                 </div>  
                             
